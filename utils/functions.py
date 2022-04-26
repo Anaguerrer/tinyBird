@@ -8,7 +8,7 @@ def generate_random_data(size, missing_weight, waiting_weight, returned_weight):
     returned_n= round(n*returned_weight)
 
     np.random.seed(0)
-    col = ['tracking_order', 'shipped', 'waiting', 'waiting_date', 'delivered', 'delivered_date', 'returned', 'returned_date', 'missing', 'missing_date']
+    col = ['tracking_order', 'shipped_date', 'waiting', 'waiting_date', 'delivered', 'delivered_date', 'returned', 'returned_date', 'missing', 'missing_date']
     # empty dataframe with selected columns
     df = pd.DataFrame(columns=col)
    
@@ -18,7 +18,7 @@ def generate_random_data(size, missing_weight, waiting_weight, returned_weight):
 
     # random dates for shipping between 2 months
     date_range_for_shipping, dates_array_shipped = get_dates('1/3/2022', '30/4/2022', n)
-    df['shipped'] = dates_array_shipped
+    df['shipped_date'] = dates_array_shipped
 
     # assingment of the status based on the weights defined
     df.loc[df.tracking_order<=missing_n,'missing']=1
@@ -30,10 +30,10 @@ def generate_random_data(size, missing_weight, waiting_weight, returned_weight):
     # definition of dates for each status and order
     rg = [1,2,3,4]
     for date in date_range_for_shipping:
-        df.loc[(df.shipped==date) & (df.missing==1),'missing_date']=date + pd.Timedelta(days=int(np.random.choice(rg, 1)))
-        df.loc[(df.shipped==date) & (df.waiting==1),'waiting_date']=date + pd.Timedelta(days=int(np.random.choice(rg, 1)))
-        df.loc[(df.shipped==date) & (df.delivered==1),'delivered_date']=date + pd.Timedelta(days=int(np.random.choice(rg, 1)))
-        df.loc[(df.shipped==date) & (df.returned==1),'returned_date']=date + pd.Timedelta(days=int(np.random.choice(rg, 1)) + int(np.random.choice(rg, 1)))
+        df.loc[(df.shipped_date==date) & (df.missing==1),'missing_date']=date + pd.Timedelta(days=int(np.random.choice(rg, 1)))
+        df.loc[(df.shipped_date==date) & (df.waiting==1),'waiting_date']=date + pd.Timedelta(days=int(np.random.choice(rg, 1)))
+        df.loc[(df.shipped_date==date) & (df.delivered==1),'delivered_date']=date + pd.Timedelta(days=int(np.random.choice(rg, 1)))
+        df.loc[(df.shipped_date==date) & (df.returned==1),'returned_date']=date + pd.Timedelta(days=int(np.random.choice(rg, 1)) + int(np.random.choice(rg, 1)))
 
     # set the rest of the values to 0
     df = df.fillna(0)

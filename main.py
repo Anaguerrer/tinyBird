@@ -4,7 +4,7 @@ from utils import functions
 
 def main():
 
-    size = 10000
+    size = 15000000
     missing_weight = 0.03 
     waiting_weight = 0.08
     returned_weight= 0.11
