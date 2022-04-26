@@ -4,7 +4,13 @@ from utils import functions
 
 def main():
 
-    size = 15000000
+    logging.basicConfig(filename="std.log",
+					format='%(asctime)s %(message)s', 
+					filemode='a',
+                    level=logging.DEBUG) 
+    logging.info('starting main')
+
+    size = 15000
     missing_weight = 0.03 
     waiting_weight = 0.08
     returned_weight= 0.11
