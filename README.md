@@ -1,4 +1,4 @@
-# tinyBirds
+# tinyBird
 
 In order to generate random data for a demo, we must first think about the goal, that is, the use case.
 
